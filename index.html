@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>RR vs Priority Scheduler</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Barlow:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header>
+    <div class="header-inner">
+      <div class="logo">◈ SCHED<span>COMPARE</span></div>
+      <div class="subtitle">Round Robin vs Preemptive Priority — CPU Scheduling Comparator</div>
+      <div class="badges">
+        <span class="badge rr-badge">RR</span>
+        <span class="vs">vs</span>
+        <span class="badge pr-badge">PRIORITY</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ── SECTION 1: INPUT (Person 1) ── -->
+    <section class="card" id="section-input">
+      <h2 class="section-title"><span class="tag">01</span> Process Input</h2>
+
+      <div class="info-bar">
+        <span>📌 Lower priority number = Higher urgency (e.g. Priority 1 runs before Priority 3)</span>
+      </div>
+
+      <div class="table-wrapper">
+        <table id="process-table">
+          <thead>
+            <tr>
+              <th>Process ID</th>
+              <th>Arrival Time</th>
+              <th>Burst Time</th>
+              <th>Priority <span class="th-note">(1=highest)</span></th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="process-tbody">
+            <!-- Rows injected by input.js -->
+          </tbody>
+        </table>
+      </div>
+
+      <div class="input-controls">
+        <button id="btn-add-row" class="btn btn-secondary">+ Add Process</button>
+        <div class="quantum-group">
+          <label for="quantum-input">⏱ Time Quantum (RR):</label>
+          <input type="number" id="quantum-input" min="1" value="2" />
+        </div>
+      </div>
+
+      <div id="error-box" class="error-box hidden"></div>
+
+      <div class="action-row">
+        <button id="btn-run" class="btn btn-primary">▶ Run Simulation</button>
+        <button id="btn-reset" class="btn btn-danger">✕ Reset</button>
+      </div>
+    </section>
+
+    <!-- ── SECTION 2: GANTT CHARTS (Person 4) ── -->
+    <section class="card hidden" id="section-gantt">
+      <h2 class="section-title"><span class="tag">02</span> Gantt Charts</h2>
+      <div id="gantt-rr-container">
+        <h3 class="algo-label rr-label" id="gantt-rr-title">Round Robin</h3>
+        <div id="gantt-rr" class="gantt-area"></div>
+      </div>
+      <div id="gantt-pr-container">
+        <h3 class="algo-label pr-label">Preemptive Priority</h3>
+        <div id="gantt-pr" class="gantt-area"></div>
+      </div>
+    </section>
+
+    <!-- ── SECTION 3: METRICS TABLES (Person 5) ── -->
+    <section class="card hidden" id="section-metrics">
+      <h2 class="section-title"><span class="tag">03</span> Performance Metrics</h2>
+      <div class="metrics-grid">
+        <div>
+          <h3 class="algo-label rr-label">Round Robin</h3>
+          <div id="metrics-rr"></div>
+        </div>
+        <div>
+          <h3 class="algo-label pr-label">Preemptive Priority</h3>
+          <div id="metrics-pr"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── SECTION 4: COMPARISON (Person 6) ── -->
+    <section class="card hidden" id="section-comparison">
+      <h2 class="section-title"><span class="tag">04</span> Algorithm Comparison</h2>
+      <div id="comparison-table-container"></div>
+      <div id="recommendation-box" class="recommendation-box"></div>
+    </section>
+
+    <!-- ── SECTION 5: TEST SCENARIOS (Person 6) ── -->
+    <section class="card" id="section-tests">
+      <h2 class="section-title"><span class="tag">05</span> Test Scenarios</h2>
+      <div class="test-buttons">
+        <button class="btn btn-test" onclick="loadTestScenario(1)">Test 1 — Normal Case</button>
+        <button class="btn btn-test" onclick="loadTestScenario(2)">Test 2 — Urgency Reveal</button>
+        <button class="btn btn-test" onclick="loadTestScenario(3)">Test 3 — Invalid Input</button>
+      </div>
+      <div id="test-description" class="test-description"></div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>Round Robin vs Preemptive Priority — CPU Scheduling Comparison Project</p>
+  </footer>
+
+  <script src="roundrobin.js"></script>
+  <script src="priority.js"></script>
+  <script src="gantt.js"></script>
+  <script src="metrics.js"></script>
+  <script src="comparison.js"></script>
+  <script src="input.js"></script>
+
+</body>
+</html>
