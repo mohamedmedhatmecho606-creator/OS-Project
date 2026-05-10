@@ -1,19 +1,10 @@
-// ════════════════════════════════════════════════════════
-//  comparison.js  —  PERSON 6: Comparison & Analysis
-//
-//  NEW vs RR-SRTF project:
-//    - Comparison includes Priority-specific rows:
-//        Starvation Risk, Urgency Support, Priority Awareness
-//    - Recommendation discusses service differentiation
-//      and when urgency-based scheduling is appropriate
-// ════════════════════════════════════════════════════════
 
 function renderComparison(rrMetrics, prMetrics) {
   renderComparisonTable(rrMetrics.averages, prMetrics.averages);
   renderRecommendation(rrMetrics.averages, prMetrics.averages);
 }
 
-// ── Side-by-side table ────────────────────────────────────
+
 function renderComparisonTable(rrAvg, prAvg) {
   const container = document.getElementById("comparison-table-container");
   container.innerHTML = "";
@@ -116,7 +107,7 @@ function renderComparisonTable(rrAvg, prAvg) {
   container.appendChild(table);
 }
 
-// ── Written recommendation ────────────────────────────────
+
 function renderRecommendation(rrAvg, prAvg) {
   const box = document.getElementById("recommendation-box");
 
@@ -152,27 +143,3 @@ EFFECT OF QUANTUM ON ROUND ROBIN:
   box.textContent = text;
 }
 
-// ════════════════════════════════════════════════════════
-//  PERSON 6 — YOUR CHECKLIST
-//
-//  ✅ Build comparison table (done above)
-//  ✅ Write recommendation (done above)
-//
-//  STILL TODO:
-//  [ ] Run Test 1 (Normal), screenshot results, document in report
-//  [ ] Run Test 2 (Urgency Reveal), screenshot, show P1 starving
-//  [ ] Run Test 3 (Invalid), screenshot all error messages shown
-//
-//  REPORT MUST INCLUDE:
-//  [ ] Introduction: what is CPU scheduling, what are RR and Priority?
-//  [ ] Priority Rule clearly stated: lower number = higher urgency
-//  [ ] Quantum value stated and justified
-//  [ ] Assumptions: preemptive, no aging, single CPU, no I/O
-//  [ ] Algorithm explanations with examples
-//  [ ] All 3 test scenario screenshots + tables
-//  [ ] Fairness vs urgency analysis
-//  [ ] Starvation discussion + aging as a solution
-//  [ ] Effect of quantum size on RR behavior
-//  [ ] Limitations of the tool
-//  [ ] Conclusion: when to use each algorithm
-// ════════════════════════════════════════════════════════
