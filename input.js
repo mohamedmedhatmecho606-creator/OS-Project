@@ -1,13 +1,3 @@
-// ════════════════════════════════════════════════════════
-//  input.js  —  PERSON 1: Input Form & Validation
-//
-//  NEW vs RR-SRTF project:
-//    - Process table now includes a PRIORITY column
-//    - Priority validation: whole number ≥ 1
-//    - Priority rule stated in info-bar (lower = higher urgency)
-//    - Quantum label updated for RR only
-// ════════════════════════════════════════════════════════
-
 let processes = [
   { id: "P1", arrival: 0, burst: 6, priority: 2 },
   { id: "P2", arrival: 1, burst: 4, priority: 1 },
@@ -19,7 +9,7 @@ const tbody        = document.getElementById("process-tbody");
 const errorBox     = document.getElementById("error-box");
 const quantumInput = document.getElementById("quantum-input");
 
-// ── Render table ──────────────────────────────────────────
+
 function renderTable() {
   tbody.innerHTML = "";
 
@@ -35,7 +25,6 @@ function renderTable() {
     tbody.appendChild(tr);
   });
 
-  // Live sync inputs → processes array
   tbody.querySelectorAll(".pid-input").forEach(el =>
     el.addEventListener("input", e => { processes[e.target.dataset.i].id = e.target.value.trim(); }));
   tbody.querySelectorAll(".arrival-input").forEach(el =>
@@ -45,7 +34,6 @@ function renderTable() {
   tbody.querySelectorAll(".priority-input").forEach(el =>
     el.addEventListener("input", e => { processes[e.target.dataset.i].priority = Number(e.target.value); }));
 
-  // Delete row
   tbody.querySelectorAll(".btn-delete").forEach(btn =>
     btn.addEventListener("click", e => {
       processes.splice(Number(e.target.dataset.i), 1);
@@ -53,14 +41,12 @@ function renderTable() {
     }));
 }
 
-// ── Add row ───────────────────────────────────────────────
 document.getElementById("btn-add-row").addEventListener("click", () => {
   const n = processes.length + 1;
   processes.push({ id: `P${n}`, arrival: 0, burst: 1, priority: 1 });
   renderTable();
 });
 
-// ── Reset ─────────────────────────────────────────────────
 document.getElementById("btn-reset").addEventListener("click", () => {
   processes = [
     { id: "P1", arrival: 0, burst: 6, priority: 2 },
@@ -75,7 +61,7 @@ document.getElementById("btn-reset").addEventListener("click", () => {
   document.getElementById("test-description").textContent = "";
 });
 
-// ── Validation ────────────────────────────────────────────
+
 function validate() {
   const errors = [];
 
@@ -119,7 +105,7 @@ function hideResults() {
     document.getElementById(id).classList.add("hidden"));
 }
 
-// ── Sync table inputs before running ─────────────────────
+
 function syncFromTable() {
   tbody.querySelectorAll("tr").forEach((tr, i) => {
     if (!processes[i]) return;
@@ -130,7 +116,7 @@ function syncFromTable() {
   });
 }
 
-// ── RUN ───────────────────────────────────────────────────
+
 document.getElementById("btn-run").addEventListener("click", () => {
   syncFromTable();
 
@@ -144,21 +130,18 @@ document.getElementById("btn-run").addEventListener("click", () => {
   document.getElementById("gantt-rr-title").textContent =
     `Round Robin  |  Quantum = ${quantum}`;
 
-  // ── Algorithms (Person 2 & 3) ──
+
   const rrResult = runRoundRobin(processes.map(p => ({...p})), quantum);
   const prResult = runPriority(processes.map(p => ({...p})));
 
-  // ── Gantt charts (Person 4) ──
   renderGanttChart("gantt-rr", rrResult.gantt);
   renderGanttChart("gantt-pr", prResult.gantt);
 
-  // ── Metrics (Person 5) ──
   const rrMetrics = calculateMetrics(rrResult.procs);
   const prMetrics = calculateMetrics(prResult.procs);
   renderMetricsTable("metrics-rr", rrMetrics);
   renderMetricsTable("metrics-pr", prMetrics);
 
-  // ── Comparison (Person 6) ──
   renderComparison(rrMetrics, prMetrics);
 
   // Show sections
@@ -168,7 +151,6 @@ document.getElementById("btn-run").addEventListener("click", () => {
   document.getElementById("section-gantt").scrollIntoView({ behavior: "smooth" });
 });
 
-// ── Test Scenarios (Person 6 loads these) ────────────────
 function loadTestScenario(num) {
   const desc = document.getElementById("test-description");
   hideResults();
@@ -225,5 +207,4 @@ function loadTestScenario(num) {
   document.getElementById("section-input").scrollIntoView({ behavior: "smooth" });
 }
 
-// ── Init ──────────────────────────────────────────────────
 renderTable();
