@@ -42,27 +42,12 @@ It focuses on:
 
 # 🧩 Implemented Algorithms
 
-1. **FCFS (First-Come, First-Served)**
-
-   * Non-preemptive scheduling
-   * Processes execute strictly based on arrival order
-
-2. **SJF (Shortest Job First)**
-
-   * Non-preemptive scheduling
-   * Executes the process with the smallest burst time first
-
-3. **SRTF (Shortest Remaining Time First)**
-
-   * Preemptive version of SJF
-   * Dynamically switches processes based on remaining execution time
-
-4. **Round Robin (RR)**
+1. **Round Robin (RR)**
 
    * Preemptive scheduling
    * Uses configurable Time Quantum for fair CPU allocation
 
-5. **Priority Scheduling**
+2. **Priority Scheduling**
 
    * Executes processes according to assigned priorities
    * Supports priority-based execution logic
